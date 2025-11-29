@@ -1,0 +1,648 @@
+export const REGEX_DATA = [
+  // ==========================================
+  // 1. IDENTITY & AUTHENTICATION
+  // ==========================================
+  {
+    id: "auth_email_modern",
+    title: "Valid Email (Modern)",
+    description:
+      "Robust email validation that covers 99% of use cases, including subdomains and modern TLDs.",
+    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    category: "Identity",
+    complexity: "Medium",
+    tags: ["email", "contact", "web", "validation"],
+  },
+  {
+    id: "auth_email_strict",
+    title: "Strict Email (RFC-like)",
+    description:
+      "Stricter validation that disallows common invalid characters in the local part.",
+    pattern:
+      "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+    category: "Identity",
+    complexity: "High",
+    tags: ["email", "rfc", "strict", "security"],
+  },
+  {
+    id: "auth_username_alphanum",
+    title: "Username (Alphanumeric)",
+    description: "Letters and numbers only, 3 to 16 characters.",
+    pattern: "^[a-zA-Z0-9]{3,16}$",
+    category: "Identity",
+    complexity: "Low",
+    tags: ["user", "login", "account"],
+  },
+  {
+    id: "auth_username_letters",
+    title: "Username (Letters Only)",
+    description:
+      "Alphabetic characters only (case-insensitive), 3-16 characters.",
+    pattern: "^[a-zA-Z]{3,16}$",
+    category: "Identity",
+    complexity: "Low",
+    tags: ["user", "login", "text"],
+  },
+  {
+    id: "auth_fullname",
+    title: "Full Name",
+    description:
+      "Matches First and Last name (separated by space). Allows for multiple names/middle names.",
+    pattern: "^[a-zA-Z]+(?: [a-zA-Z]+)+$",
+    category: "Identity",
+    complexity: "Low",
+    tags: ["name", "profile", "form"],
+  },
+  {
+    id: "auth_pass_strong",
+    title: "Strong Password",
+    description:
+      "Min 8 chars. Requires: 1 uppercase, 1 lowercase, 1 digit, 1 special character.",
+    pattern:
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+    category: "Identity",
+    complexity: "High",
+    tags: ["password", "security", "login"],
+  },
+  {
+    id: "auth_pass_medium",
+    title: "Medium Password",
+    description:
+      "Min 6 chars. Must match at least two types: letters, numbers, or mixed case.",
+    pattern:
+      "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})",
+    category: "Identity",
+    complexity: "Medium",
+    tags: ["password", "security"],
+  },
+
+  // ==========================================
+  // 2. PHONE & LOCATION
+  // ==========================================
+  {
+    id: "phone_in",
+    title: "Indian Phone Number",
+    description:
+      "Matches +91 or 91 prefix (optional) followed by 10 digits starting with 6-9.",
+    pattern: "^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[6789]\\d{9}$",
+    category: "Phone",
+    complexity: "Medium",
+    tags: ["phone", "india", "mobile"],
+  },
+  {
+    id: "phone_us",
+    title: "US Phone Number",
+    description:
+      "Matches (555) 555-5555, 555-555-5555, 555 555 5555, or no separators.",
+    pattern: "^(?:\\(?\\d{3}\\)?[-. ]?)?\\d{3}[-. ]?\\d{4}$",
+    category: "Phone",
+    complexity: "Medium",
+    tags: ["phone", "us", "contact"],
+  },
+  {
+    id: "phone_int",
+    title: "International Phone (E.164)",
+    description:
+      "Matches international format starting with + and 7-15 digits.",
+    pattern: "^\\+[1-9]\\d{6,14}$",
+    category: "Phone",
+    complexity: "Low",
+    tags: ["phone", "global", "mobile"],
+  },
+  {
+    id: "loc_zip_us",
+    title: "US Zip Code",
+    description:
+      "Matches 5-digit zip codes and 5+4 zip codes (e.g., 90210 or 90210-1234).",
+    pattern: "^\\d{5}(?:[-\\s]\\d{4})?$",
+    category: "Location",
+    complexity: "Low",
+    tags: ["address", "us", "postal"],
+  },
+  {
+    id: "loc_pin_in",
+    title: "Indian PIN Code",
+    description: "6 digit PIN code, cannot start with 0.",
+    pattern: "^[1-9][0-9]{5}$",
+    category: "Location",
+    complexity: "Low",
+    tags: ["address", "india", "postal"],
+  },
+
+  // ==========================================
+  // 3. WEB & NETWORK
+  // ==========================================
+  {
+    id: "web_url",
+    title: "URL Validation",
+    description:
+      "Matches HTTP/HTTPS URLs, ensuring valid domain structure and optional query strings.",
+    pattern:
+      "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$",
+    category: "Web",
+    complexity: "High",
+    tags: ["link", "internet", "http"],
+  },
+  {
+    id: "web_ipv4",
+    title: "IPv4 Address",
+    description: "Matches valid IP addresses (0.0.0.0 to 255.255.255.255).",
+    pattern:
+      "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+    category: "Web",
+    complexity: "High",
+    tags: ["network", "ip", "tcp"],
+  },
+  {
+    id: "web_ipv6",
+    title: "IPv6 Address",
+    description:
+      "Matches standard IPv6 addresses, including compressed formats.",
+    pattern:
+      "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+    category: "Web",
+    complexity: "Very High",
+    tags: ["network", "ip"],
+  },
+  {
+    id: "web_mac",
+    title: "MAC Address",
+    description: "Matches standard MAC addresses (colon or dash separated).",
+    pattern: "^(?:[0-9A-Fa-f]{2}[:-]){5}(?:[0-9A-Fa-f]{2})$",
+    category: "Web",
+    complexity: "Medium",
+    tags: ["network", "hardware"],
+  },
+  {
+    id: "web_slug",
+    title: "URL Slug",
+    description:
+      "URL-friendly string: lowercase letters, numbers, and hyphens.",
+    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+    category: "Web",
+    complexity: "Low",
+    tags: ["seo", "url", "path"],
+  },
+  {
+    id: "web_domain",
+    title: "Extract Domain",
+    description:
+      "Captures the domain name from a URL string (e.g., google.com from https://www.google.com).",
+    pattern: "(?:https?:\\/\\/)?(?:www\\.)?([^\\/]+)",
+    category: "Web",
+    complexity: "Medium",
+    tags: ["url", "parser", "domain"],
+  },
+  {
+    id: "web_subdomain",
+    title: "Extract Subdomain",
+    description: "Captures the subdomain from a URL.",
+    pattern: "^(?:https?:\\/\\/)?([^.]+)(?=\\.[^.]+\\.[^.]+$)",
+    category: "Web",
+    complexity: "High",
+    tags: ["url", "parser", "domain"],
+  },
+  {
+    id: "web_query",
+    title: "Extract Query Parameters",
+    description: "Matches key=value pairs in a URL query string.",
+    pattern: "[?&]([^=#]+)=([^&#]*)",
+    category: "Web",
+    complexity: "Medium",
+    tags: ["url", "parser", "api"],
+  },
+
+  // ==========================================
+  // 4. NUMBERS & FINANCIAL
+  // ==========================================
+  {
+    id: "num_int",
+    title: "Integer Only",
+    description: "Whole numbers only (no decimals).",
+    pattern: "^\\d+$",
+    category: "Numbers",
+    complexity: "Low",
+    tags: ["math", "input", "digits"],
+  },
+  {
+    id: "num_decimal",
+    title: "Decimal Number",
+    description: "Numbers with a decimal point.",
+    pattern: "^\\d*\\.\\d+$",
+    category: "Numbers",
+    complexity: "Low",
+    tags: ["math", "float", "input"],
+  },
+  {
+    id: "num_pos",
+    title: "Positive Number",
+    description: "Numbers greater than zero (integers or decimals).",
+    pattern: "^(0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*)$",
+    category: "Numbers",
+    complexity: "Medium",
+    tags: ["math", "input"],
+  },
+  {
+    id: "num_neg",
+    title: "Negative Number",
+    description: "Numbers starting with a minus sign.",
+    pattern: "^-\\d+(\\.\\d+)?$",
+    category: "Numbers",
+    complexity: "Low",
+    tags: ["math", "signed"],
+  },
+  {
+    id: "num_commas",
+    title: "Number with Commas",
+    description: "Matches numbers formatted with commas (e.g., 1,000,000).",
+    pattern: "^\\d{1,3}(,\\d{3})*(\\.\\d+)?$",
+    category: "Numbers",
+    complexity: "Medium",
+    tags: ["format", "currency"],
+  },
+  {
+    id: "fin_curr_usd",
+    title: "Currency Format (USD)",
+    description: "Dollar amount with optional cents and commas.",
+    pattern: "^\\$?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?$",
+    category: "Financial",
+    complexity: "Medium",
+    tags: ["money", "price", "payment"],
+  },
+  {
+    id: "fin_curr_inr",
+    title: "Currency Format (INR)",
+    description: "Rupee amount (₹), handles Indian number system grouping.",
+    pattern: "^₹?\\s?[\\d,]+(\\.\\d{2})?$",
+    category: "Financial",
+    complexity: "Medium",
+    tags: ["money", "india", "price"],
+  },
+  {
+    id: "fin_cc",
+    title: "Credit Card (General)",
+    description: "Matches 13-19 digit card numbers (Visa, MC, Amex, Discover).",
+    pattern:
+      "^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})$",
+    category: "Financial",
+    complexity: "High",
+    tags: ["payment", "bank", "security"],
+  },
+  {
+    id: "fin_pan",
+    title: "Indian PAN Number",
+    description: "Standard 10-character alphanumeric PAN format (ABCDE1234F).",
+    pattern: "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+    category: "Financial",
+    complexity: "Medium",
+    tags: ["india", "tax", "identity"],
+  },
+  {
+    id: "fin_aadhaar",
+    title: "Indian Aadhaar",
+    description: "12 digit UID number, often grouped in 4s.",
+    pattern: "^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$",
+    category: "Financial",
+    complexity: "Medium",
+    tags: ["india", "identity", "government"],
+  },
+
+  // ==========================================
+  // 5. DATE & TIME
+  // ==========================================
+  {
+    id: "date_iso",
+    title: "Date (ISO 8601)",
+    description: "YYYY-MM-DD format.",
+    pattern: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+    category: "Date/Time",
+    complexity: "Medium",
+    tags: ["calendar", "database"],
+  },
+  {
+    id: "date_in_uk",
+    title: "Date (DD/MM/YYYY)",
+    description: "Common format for India and UK.",
+    pattern: "^(0[1-9]|[12]\\d|3[01])\\/(0[1-9]|1[0-2])\\/\\d{4}$",
+    category: "Date/Time",
+    complexity: "Medium",
+    tags: ["calendar", "india", "uk"],
+  },
+  {
+    id: "date_us",
+    title: "Date (MM/DD/YYYY)",
+    description: "US standard date format.",
+    pattern: "^(0[1-9]|1[0-2])\\/(0[1-9]|[12]\\d|3[01])\\/\\d{4}$",
+    category: "Date/Time",
+    complexity: "Medium",
+    tags: ["calendar", "us"],
+  },
+  {
+    id: "time_24",
+    title: "24-hour Time",
+    description: "HH:MM format (00:00 to 23:59).",
+    pattern: "^(?:[01]\\d|2[0-3]):[0-5]\\d$",
+    category: "Date/Time",
+    complexity: "Low",
+    tags: ["clock", "time"],
+  },
+  {
+    id: "time_12",
+    title: "12-hour Time",
+    description: "HH:MM AM/PM format.",
+    pattern: "^(0?[1-9]|1[0-2]):[0-5][0-9] ?(?:[AaPp][Mm])$",
+    category: "Date/Time",
+    complexity: "Medium",
+    tags: ["clock", "time"],
+  },
+
+  // ==========================================
+  // 6. CODE & DEVELOPMENT
+  // ==========================================
+  {
+    id: "code_html_tag",
+    title: "HTML Tags",
+    description: "Matches any opening and closing HTML tag.",
+    pattern: "<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>)",
+    category: "Development",
+    complexity: "High",
+    tags: ["html", "markup", "web"],
+  },
+  {
+    id: "code_img_tag",
+    title: "Image Tag",
+    description: "Matches HTML img tags.",
+    pattern: '<img\\s+[^>]*src="([^"]*)"[^>]*>',
+    category: "Development",
+    complexity: "Medium",
+    tags: ["html", "image"],
+  },
+  {
+    id: "code_hyperlink",
+    title: "Hyperlink (Anchor)",
+    description: 'Matches standard anchor tags <a href="...">.',
+    pattern: '<a\\s+(?:[^>]*?\\s+)?href="([^"]*)"',
+    category: "Development",
+    complexity: "High",
+    tags: ["html", "link"],
+  },
+  {
+    id: "code_src_href",
+    title: "Extract src/href",
+    description: "Captures the value inside src or href attributes.",
+    pattern: "\\b(src|href)=['\"]([^'\"]+)['\"]",
+    category: "Development",
+    complexity: "Medium",
+    tags: ["html", "attributes", "parsing"],
+  },
+  {
+    id: "code_hex",
+    title: "CSS Hex Color",
+    description: "Matches #RGB, #RRGGBB, and #RRGGBBAA formats.",
+    pattern: "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8})$",
+    category: "Development",
+    complexity: "Medium",
+    tags: ["css", "design", "color"],
+  },
+  {
+    id: "code_js_func",
+    title: "JS Function Name",
+    description: "Extracts function names from definitions.",
+    pattern: "function\\s*([a-zA-Z_$][0-9a-zA-Z_$]*)",
+    category: "Development",
+    complexity: "Medium",
+    tags: ["javascript", "parsing"],
+  },
+  {
+    id: "code_import",
+    title: "JS Import Statement",
+    description: "Matches ES6 import statements.",
+    pattern: "import\\s+.*?\\s+from\\s+['\"].*?['\"]",
+    category: "Development",
+    complexity: "Medium",
+    tags: ["javascript", "es6"],
+  },
+  {
+    id: "code_semver",
+    title: "Semantic Versioning",
+    description: "Matches version strings like 1.0.0, 2.1.3-alpha.",
+    pattern:
+      "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+    category: "Development",
+    complexity: "High",
+    tags: ["version", "npm"],
+  },
+  {
+    id: "code_uuid",
+    title: "UUID v4",
+    description: "Matches standard UUID v4 format.",
+    pattern:
+      "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+    category: "Development",
+    complexity: "Medium",
+    tags: ["id", "database", "key"],
+  },
+
+  // ==========================================
+  // 7. FILES & FORMATS
+  // ==========================================
+  {
+    id: "file_img",
+    title: "Image Extensions",
+    description: "Matches strings ending in jpg, png, gif, webp, etc.",
+    pattern: "^.+\\.(jpg|jpeg|png|gif|webp|svg|bmp)$",
+    category: "Files",
+    complexity: "Low",
+    tags: ["media", "upload", "extension"],
+  },
+  {
+    id: "file_audio",
+    title: "Audio Extensions",
+    description: "Matches strings ending in mp3, wav, ogg.",
+    pattern: "^.+\\.(mp3|wav|ogg|flac|aac)$",
+    category: "Files",
+    complexity: "Low",
+    tags: ["media", "music"],
+  },
+  {
+    id: "file_video",
+    title: "Video Extensions",
+    description: "Matches strings ending in mp4, mov, avi.",
+    pattern: "^.+\\.(mp4|mov|avi|webm|mkv)$",
+    category: "Files",
+    complexity: "Low",
+    tags: ["media", "movie"],
+  },
+  {
+    id: "file_doc",
+    title: "Document Extensions",
+    description: "Matches pdf, docx, txt, xls, etc.",
+    pattern: "^.+\\.(pdf|docx?|txt|rtf|odt|xls|xlsx|pptx?)$",
+    category: "Files",
+    complexity: "Low",
+    tags: ["office", "work"],
+  },
+
+  // ==========================================
+  // 8. SECURITY UTILITIES
+  // ==========================================
+  {
+    id: "sec_sanitize",
+    title: "Remove HTML Tags",
+    description: "Finds all HTML tags for removal/sanitization.",
+    pattern: "<[^>]*>",
+    category: "Security",
+    complexity: "Low",
+    tags: ["xss", "clean"],
+  },
+  {
+    id: "sec_sql_inject",
+    title: "Block SQL Injection",
+    description: "Detects common SQL keywords (Case Insensitive).",
+    pattern:
+      "\\b(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|CREATE|TRUNCATE)\\b",
+    category: "Security",
+    complexity: "Medium",
+    tags: ["sql", "attack", "database"],
+  },
+  {
+    id: "sec_base64",
+    title: "Detect Base64",
+    description: "Validates if a string is Base64 encoded.",
+    pattern:
+      "^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$",
+    category: "Security",
+    complexity: "Medium",
+    tags: ["encoding", "data"],
+  },
+  {
+    id: "sec_jwt",
+    title: "Detect JWT Token",
+    description: "Matches the Header.Payload.Signature structure of JWT.",
+    pattern: "^[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]*$",
+    category: "Security",
+    complexity: "Medium",
+    tags: ["auth", "token"],
+  },
+  {
+    id: "sec_md5",
+    title: "MD5 Hash",
+    description: "32-character hexadecimal hash.",
+    pattern: "^[a-f0-9]{32}$",
+    category: "Security",
+    complexity: "Low",
+    tags: ["crypto", "hash"],
+  },
+
+  // ==========================================
+  // 9. STRING MANIPULATION & ADVANCED
+  // ==========================================
+  {
+    id: "str_alphanum",
+    title: "Alphanumeric Only",
+    description: "Matches string containing only letters and numbers.",
+    pattern: "^[a-zA-Z0-9]+$",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["clean", "input"],
+  },
+  {
+    id: "str_letters",
+    title: "Letters Only",
+    description: "Matches string containing only letters.",
+    pattern: "^[a-zA-Z]+$",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["clean", "input"],
+  },
+  {
+    id: "str_letters_space",
+    title: "Letters + Spaces Only",
+    description: "Useful for names or titles.",
+    pattern: "^[a-zA-Z\\s]+$",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["clean", "input"],
+  },
+  {
+    id: "str_no_special",
+    title: "No Special Characters",
+    description: "Matches string with no symbols (allows spaces).",
+    pattern: "^[a-zA-Z0-9\\s]*$",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["clean", "input"],
+  },
+  {
+    id: "str_trim",
+    title: "Trim Extra Spaces",
+    description: "Matches leading/trailing whitespace.",
+    pattern: "^\\s+|\\s+$",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["cleanup"],
+  },
+  {
+    id: "str_dup_space",
+    title: "Remove Duplicate Spaces",
+    description: "Matches 2 or more consecutive spaces.",
+    pattern: "\\s{2,}",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["cleanup", "format"],
+  },
+  {
+    id: "str_blank_line",
+    title: "Remove Blank Lines",
+    description: "Matches lines containing only whitespace.",
+    pattern: "^\\s*[\\r\\n]",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["cleanup", "format"],
+  },
+  {
+    id: "str_tabs",
+    title: "Tabs Detection",
+    description: "Matches tab characters.",
+    pattern: "\\t",
+    category: "Strings",
+    complexity: "Low",
+    tags: ["format", "code"],
+  },
+  {
+    id: "str_repeated_word",
+    title: "Match Repeated Words",
+    description: "Finds duplicate consecutive words (e.g., 'the the').",
+    pattern: "\\b(\\w+)\\s+\\1\\b",
+    category: "Strings",
+    complexity: "Medium",
+    tags: ["grammar", "cleanup"],
+  },
+  {
+    id: "str_emoji",
+    title: "Match Emojis",
+    description: "Matches a wide range of unicode emoji characters.",
+    pattern:
+      "(\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff])",
+    category: "Strings",
+    complexity: "High",
+    tags: ["unicode", "social"],
+  },
+  {
+    id: "adv_lookahead",
+    title: "Positive Lookahead Example",
+    description: "Matches 'q' only if followed by 'u'.",
+    pattern: "q(?=u)",
+    category: "Advanced",
+    complexity: "High",
+    tags: ["lookahead", "learning"],
+  },
+  {
+    id: "adv_named_group",
+    title: "Named Capturing Group",
+    description: "Extracts date parts into groups named year, month, day.",
+    pattern: "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})",
+    category: "Advanced",
+    complexity: "Medium",
+    tags: ["groups", "parsing"],
+  },
+];
