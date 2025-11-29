@@ -13,7 +13,7 @@ import {
   FileText,
   ShieldCheck,
   Type,
-  Sparkles,
+  BookMarked,
   Terminal,
   Activity,
 } from "lucide-react";
@@ -57,7 +57,7 @@ const getCategoryConfig = (category) => {
       icon: Type,
     },
     advanced: {
-      icon: Sparkles,
+      icon: BookMarked,
     },
   };
 
