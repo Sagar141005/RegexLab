@@ -5,6 +5,7 @@ const defaultTheme = "system";
 
 const ThemeContext = createContext({
   theme: defaultTheme,
+  resolvedTheme: "light",
   setTheme: () => {},
 });
 
@@ -12,6 +13,13 @@ export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(
     () => localStorage.getItem(storageKey) || defaultTheme
   );
+
+  const resolvedTheme =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
 
   const setTheme = (newTheme) => {
     setThemeState(newTheme);
@@ -21,19 +29,11 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      root.classList.add(systemPrefersDark ? "dark" : "light");
-    } else {
-      root.classList.add(theme);
-    }
-  }, [theme]);
+    root.classList.add(resolvedTheme);
+  }, [resolvedTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

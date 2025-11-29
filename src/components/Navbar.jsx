@@ -4,7 +4,9 @@ import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "./ThemeProvider";
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,19 +17,8 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
   const toggleTheme = () => {
-    if (theme === "light") return setTheme("dark");
-    if (theme === "dark") return setTheme("light");
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setTheme(systemDark ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   return (
