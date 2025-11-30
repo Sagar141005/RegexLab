@@ -33,7 +33,7 @@ const SearchBar = ({ value, onChange }) => {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Search patterns (e.g. Email, Date, etc.)"
-          className="w-full h-12 pl-10 pr-28 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl text-sm font-medium text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 
+          className="w-full h-12 pl-10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl text-sm font-medium text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-sm transition-all duration-300 
           focus:outline-none focus:border-neutral-500/40 dark:focus:border-neutral-500/50"
         />
 
