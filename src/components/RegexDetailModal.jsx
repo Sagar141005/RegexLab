@@ -68,6 +68,7 @@ const RegexDetailModal = ({ isOpen, onClose, item }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="fixed inset-0 z-60 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm"
           />
 
@@ -77,7 +78,7 @@ const RegexDetailModal = ({ isOpen, onClose, item }) => {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              transition={{ type: "spring", stiffness: 150, damping: 25 }}
               className="w-full max-w-2xl bg-white dark:bg-black rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden pointer-events-auto flex flex-col max-h-[90vh]"
             >
               <div className="flex items-start justify-between p-6 border-b border-neutral-200 dark:border-neutral-800">

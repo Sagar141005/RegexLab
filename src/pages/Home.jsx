@@ -110,11 +110,9 @@ const Home = () => {
           </div>
 
           <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <AnimatePresence mode="popLayout">
-              {filteredRegex.map((item) => (
-                <RegexCard item={item} key={item.id} />
-              ))}
-            </AnimatePresence>
+            {filteredRegex.map((item) => (
+              <RegexCard key={item.id} item={item} />
+            ))}
           </motion.div>
 
           {filteredRegex.length === 0 && (
