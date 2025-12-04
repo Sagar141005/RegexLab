@@ -15,14 +15,14 @@ Every pattern includes a built-in test area.
 Type sample input → instantly see matches, groups, and validation results.
 ### 🗂 Categories
 Patterns are grouped into logical categories such as:
-**Emails**  
-**URLs & Domains**  
-**Passwords**  
-**Numbers**  
-**Dates**  
-**Phone Numbers**  
-**Input Sanitization**  
-**Formatting / Parsing**  
+- **Emails**  
+- **URLs & Domains**  
+- **Passwords**  
+- **Numbers**  
+- **Dates**  
+- **Phone Numbers**  
+- **Input Sanitization**  
+- **Formatting / Parsing**  
 And more…  
 ### 🎨 Clean UI + Keyboard Friendly
 A minimal design focused on clarity and speed.  
@@ -33,21 +33,21 @@ Works seamlessly on desktop, tablet, or mobile.
 ## 🚀 Why RegexLab?
 Regular expressions are powerful but hard to remember.  
 RegexLab solves that by giving developers a reliable, production-ready dictionary of patterns you can drop into:  
-**Web apps**  
-**Mobile apps**  
-**CLI tools**  
-**Validation pipelines**  
-**Data cleaning scripts**  
-**Backend services**  
+- Web apps  
+- Mobile apps  
+- CLI tools  
+- Validation pipelines  
+- Data cleaning scripts  
+- Backend services  
 No more searching random StackOverflow threads or blog posts.  
 
 ## 🛠️ Tech Stack
 RegexLab is built using:  
-**React**  
-**Vite**  
-**Tailwind CSS**  
-**Lucide Icons**  
-**Vanilla RegExp Engine (no dependencies)**  
+- React  
+- Vite  
+- Tailwind CSS  
+- Lucide Icons  
+- Vanilla RegExp Engine (no dependencies)  
 
 ## 📦 Getting Started (Local Development)
 ```bash
