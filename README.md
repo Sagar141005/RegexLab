@@ -1,16 +1,75 @@
-# React + Vite
+# 🔍 RegexLab — The Developer’s Regex Dictionary
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+RegexLab is a curated, production-ready collection of Regular Expressions designed for developers.
+Search, explore, and test patterns for **validation, parsing, sanitization, matching, and formatting** — all in one clean interface.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://regexlab.sagarsaini.com   
+👉 **Author:** [Sagar Saini](https://sagarsaini.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+### 🧩 Curated Regex Library
+A hand-picked collection of **battle-tested** regex patterns used across real-world projects.
+### ⚡ Live Regex Tester
+Every pattern includes a built-in test area.
+Type sample input → instantly see matches, groups, and validation results.
+### 🗂 Categories
+Patterns are grouped into logical categories such as:
+- **Emails**  
+- **URLs & Domains**  
+- **Passwords**  
+- **Numbers**  
+- **Dates**  
+- **Phone Numbers**  
+- **Input Sanitization**  
+- **Formatting / Parsing**  
+And more…  
+### 🎨 Clean UI + Keyboard Friendly
+A minimal design focused on clarity and speed.  
+No distractions — just patterns, examples, and testing.
+### 📱 Fully Responsive
+Works seamlessly on desktop, tablet, or mobile.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Why RegexLab?
+Regular expressions are powerful but hard to remember.  
+RegexLab solves that by giving developers a reliable, production-ready dictionary of patterns you can drop into:  
+- Web apps  
+- Mobile apps  
+- CLI tools  
+- Validation pipelines  
+- Data cleaning scripts  
+- Backend services  
+No more searching random StackOverflow threads or blog posts.  
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
+RegexLab is built using:  
+- React  
+- Vite  
+- Tailwind CSS  
+- Lucide Icons  
+- Vanilla RegExp Engine (no dependencies)  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Getting Started (Local Development)
+```bash
+git clone https://github.com/<your-username>/regexlab.git
+cd regexlab
+npm install
+npm run dev
+```
+**Visit:** http://localhost:5173
+
+## 🔒 Privacy
+RegexLab does not store or transmit any input or data.  
+Your testing happens completely in your browser.  
+
+## 🤝 Contributing
+Contributions are welcome!  
+You can add new regex patterns, improve descriptions, or enhance UI/UX.  
+1. Fork the repo  
+2. Create a feature branch  
+3. Submit a PR  
+
+## ⭐ Support the Project
+If RegexLab helped you debug, validate, or write a regex faster…  
+**Consider starring the repo!**  
+It helps the project reach more developers.  
